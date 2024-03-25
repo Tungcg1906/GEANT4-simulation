@@ -6,9 +6,10 @@ For more information about how to use Geant4 and its application domains, please
 
 There are three main reference papers for Geant4:
 
-Nuclear Instruments and Methods in Physics Research A 835 (2016) 186-225
-IEEE Transactions on Nuclear Science 53 No. 1 (2006) 270-278
-Nuclear Instruments and Methods in Physics Research A 506 (2003) 250-303
-Installation
+- Nuclear Instruments and Methods in Physics Research A 835 (2016) 186-225
+- IEEE Transactions on Nuclear Science 53 No. 1 (2006) 270-278
+- Nuclear Instruments and Methods in Physics Research A 506 (2003) 250-303
+  
+## Installation
 For detailed instructions on building and installing Geant4, including all supported platforms and configuration options, please refer to the Installation Guide.
 
