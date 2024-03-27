@@ -107,8 +107,8 @@ void DetectorConstruction::DefineMaterials()
 G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
 {
   // Geometry parameters
-  G4double cellSizeXY = 1.*mm;
-  G4double cellSizeZ = 5.*mm;
+  G4double cellSizeXY = 3.*mm;
+  G4double cellSizeZ = 12.*mm;
   G4double nCellsXY = 1000;
   G4double nCellsZ = 400;
   G4double calorSizeXY = nCellsXY * cellSizeXY;

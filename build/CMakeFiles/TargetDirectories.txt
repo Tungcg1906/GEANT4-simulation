@@ -1,7 +1,7 @@
-/lustre/cmswork/fnardi/geant4/simulation/build/CMakeFiles/exampleB4a.dir
-/lustre/cmswork/fnardi/geant4/simulation/build/CMakeFiles/edit_cache.dir
-/lustre/cmswork/fnardi/geant4/simulation/build/CMakeFiles/rebuild_cache.dir
-/lustre/cmswork/fnardi/geant4/simulation/build/CMakeFiles/list_install_components.dir
-/lustre/cmswork/fnardi/geant4/simulation/build/CMakeFiles/install.dir
-/lustre/cmswork/fnardi/geant4/simulation/build/CMakeFiles/install/local.dir
-/lustre/cmswork/fnardi/geant4/simulation/build/CMakeFiles/install/strip.dir
+/Users/tungnx/Documents/geant4/simulation/build/CMakeFiles/exampleB4a.dir
+/Users/tungnx/Documents/geant4/simulation/build/CMakeFiles/edit_cache.dir
+/Users/tungnx/Documents/geant4/simulation/build/CMakeFiles/rebuild_cache.dir
+/Users/tungnx/Documents/geant4/simulation/build/CMakeFiles/list_install_components.dir
+/Users/tungnx/Documents/geant4/simulation/build/CMakeFiles/install.dir
+/Users/tungnx/Documents/geant4/simulation/build/CMakeFiles/install/local.dir
+/Users/tungnx/Documents/geant4/simulation/build/CMakeFiles/install/strip.dir
