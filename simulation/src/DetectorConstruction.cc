@@ -107,14 +107,14 @@ void DetectorConstruction::DefineMaterials()
 G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
 {
   // Geometry parameters
-  G4double cellSizeXY = 3.*mm;
-  G4double cellSizeZ = 12.*mm;
-  G4double nCellsXY = 1000;
-  G4double nCellsZ = 400;
+  G4double cellSizeXY =  3.*mm;
+  G4double cellSizeZ  = 12.*mm;
+  G4double nCellsXY = 10;
+  G4double nCellsZ  = 10;
   G4double calorSizeXY = nCellsXY * cellSizeXY;
-  G4double calorSizeZ = nCellsZ * cellSizeZ;
-  auto worldSizeXY=calorSizeXY;
-  auto worldSizeZ=1.2 * calorSizeZ; 
+  G4double calorSizeZ  = nCellsZ  * cellSizeZ;
+  auto worldSizeXY = calorSizeXY;
+  auto worldSizeZ  = calorSizeZ * 1; 
 
   // Get materials
   auto defaultMaterial = G4Material::GetMaterial("Galactic");
@@ -130,7 +130,7 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
   //
   // World
   //
-  auto worldS = new G4Box("World",worldSizeXY/2,worldSizeXY/2,worldSizeZ/2);
+  auto worldS = new G4Box("World", worldSizeXY/2, worldSizeXY/2, worldSizeZ/2);
 
   auto worldLV = new G4LogicalVolume(worldS,defaultMaterial,"World");
 
@@ -142,23 +142,23 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
     0,                                // its mother  volume
     false,                            // no boolean operation
     0,                                // copy number
-    false//fCheckOverlaps                    // checking overlaps
+    false                             // checking overlaps
   );
 
 
-  auto solidDetector=new G4Box("solidDetector",1.*mm,1.*mm,5.*mm);
+  auto solidDetector=new G4Box("solidDetector", cellSizeXY/2*mm, cellSizeXY/2*mm, cellSizeZ/2*mm);
   auto logicDetector= new G4LogicalVolume(solidDetector,detectorMaterial,"logicDetector");
   G4double a=0;
-  for(G4int k = 0; k<50;k++)
-  	{
-  	for(G4int i =0;i<50;i++)
-  		{ 
-      for(G4int j=0;j<50;j++)
-  		{ 
+  for (G4int k = 0; k < nCellsZ; k++) {
+  	for (G4int i = 0; i < nCellsXY; i++) { 
+      for (G4int j = 0; j < nCellsXY; j++) { 
         a=a+1;
-  		  auto physDetector = new G4PVPlacement(
-          0,
-          G4ThreeVector(-50.*mm+(2*i*1.+1.)*mm,-50.*mm+(2*j*1.+1.)*mm,-100.*mm+(2*k*5+5.)*mm),
+        auto physDetector = new G4PVPlacement(0,
+        G4ThreeVector(
+            -((calorSizeXY-cellSizeXY)/2.)*mm + (cellSizeXY*i)*mm,
+            -((calorSizeXY-cellSizeXY)/2.)*mm + (cellSizeXY*j)*mm,
+            -((calorSizeZ-cellSizeZ)/2.)*mm + (cellSizeZ*k)*mm
+          ),
           logicDetector,
           "physDetector",
           worldLV,

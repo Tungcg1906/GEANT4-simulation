@@ -79,39 +79,51 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
   G4double pos_x=step->GetPostStepPoint()->GetPosition().x();
   G4double pos_y=step->GetPostStepPoint()->GetPosition().y();
   G4double pos_z=step->GetPostStepPoint()->GetPosition().z();
+  G4double loc_t=step->GetPostStepPoint()->GetLocalTime();
+  G4double glb_t=step->GetPostStepPoint()->GetGlobalTime();
   G4double po=sqrt(pow(pzo,2)+pow(pyo,2)+pow(pxo,2));
-  G4double picell=(pos_x+150-1)/3 + 100*(-pos_y+150-1)/3 + 10000*(pos_z-1)/12
+  G4int ix = (pos_x+14.5)/3;
+  G4int iy = (pos_y+14.5)/3;
+  G4int iz = (pos_z+59.5)/12;
+  G4int picell_idx = ix + 10*iy + 100*iz;
+  G4int z_idx = picell_idx/200;
+  G4int x_idx = ((picell_idx%100)%10)/2;
+  G4int y_idx = (picell_idx%100)/200;
+  G4double picublet_idx = z_idx*25 + y_idx*5 + x_idx;
+  G4double picells_in_cublet = x_idx - (x_idx /2)*2 + (y_idx - (y_idx/2)*2)*10 + (z_idx - (z_idx/2)*2)*10;
 
-
-  if(po>1.*MeV){       // ENERGY CUT FOR DEBUGGING!!!!! <<< ---------------
+  if(po>1.*CLHEP::MeV){       // ENERGY CUT FOR DEBUGGING!!!!! <<< ---------------
   	tr=track->GetTrackID();
   	pt=track->GetParentID();
   	// if(trid!=tr){  // Commented. Not sure why Rumman put it
-  	  out_pno=out_pno+1;
-  	  G4double part_id = particle->GetPDGEncoding();
+  	out_pno=out_pno+1;
+  	G4double part_id = particle->GetPDGEncoding();
 
 	  // Filling MC truth ntuple
-  	  auto analysisManager = G4AnalysisManager::Instance();
-  	  analysisManager->FillNtupleDColumn(0,0,part_id);
-  	  analysisManager->FillNtupleDColumn(0,1,tr);
-  	  analysisManager->FillNtupleDColumn(0,2,pt);
-  	  analysisManager->FillNtupleDColumn(0,3,pos_x);
-  	  analysisManager->FillNtupleDColumn(0,4,pos_y);
-  	  analysisManager->FillNtupleDColumn(0,5,pos_z);
-  	  analysisManager->FillNtupleDColumn(0,6,po);
-      analysisManager->FillNtupleDColumn(0,7,picell);
-;
-
-	  // Get event ID and fill ntuple
+    // Get event ID and fill ntuple
 	  auto evtID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
-	  analysisManager->FillNtupleDColumn(0,8,evtID);
+  	auto analysisManager = G4AnalysisManager::Instance();
+    analysisManager->FillNtupleDColumn(0,0,evtID);
+  	analysisManager->FillNtupleDColumn(0,1,part_id);
+  	analysisManager->FillNtupleDColumn(0,2,tr);
+  	analysisManager->FillNtupleDColumn(0,3,pt);
+    analysisManager->FillNtupleDColumn(0,4,pos_x);
+  	analysisManager->FillNtupleDColumn(0,5,pos_y);
+  	analysisManager->FillNtupleDColumn(0,6,pos_z);
+  	analysisManager->FillNtupleDColumn(0,7,po);
+  	analysisManager->FillNtupleDColumn(0,8,loc_t);
+  	analysisManager->FillNtupleDColumn(0,9,glb_t);
+    analysisManager->FillNtupleDColumn(0,10,picell_idx);
+    analysisManager->FillNtupleDColumn(0,11,picublet_idx);
+    analysisManager->FillNtupleDColumn(0,12,picells_in_cublet);
+
 	  // All information filled. Add row to ntuple
-  	  analysisManager->AddNtupleRow(0);
-  	  G4cout<<  " EVENT N. :" <<evtID<<"\n";
-  	  pid=part_id;
-  	  tr=track->GetTrackID();
-  	  pt=track->GetParentID();
-  	  trid=tr;
+  	analysisManager->AddNtupleRow(0);
+  	G4cout<<  " EVENT N. :" <<evtID<<"\n";
+  	pid=part_id;
+  	tr=track->GetTrackID();
+  	pt=track->GetParentID();
+  	trid=tr;
   	// }
   }
   
@@ -127,10 +139,28 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
 	// Fill cell ntuple with energy deposit
     auto analysisManager = G4AnalysisManager::Instance();
     auto touchable = step->GetPreStepPoint()->GetTouchable();
-    G4double copyNo=touchable->GetVolume()->GetCopyNo();
-    analysisManager->FillNtupleDColumn(1,0,edep);
-    analysisManager->FillNtupleDColumn(1,1,copyNo);
+    G4int cell_idx=touchable->GetVolume()->GetCopyNo();
+    G4int z_idx = cell_idx/200;
+    G4int x_idx = ((cell_idx%100)%10)/2;
+    G4int y_idx = (cell_idx%100)/200;
+    G4double cublet_idx = z_idx*25 + y_idx*5 + x_idx;
+    G4double cells_in_cublet = x_idx - (x_idx /2)*2 + (y_idx - (y_idx/2)*2)*10 + (z_idx - (z_idx/2)*2)*10;
+    //G4int y_idx = (cell_idx - z_idx * 200)/ 2;
+    //G4int x_idx = cell_idx - z_idx * 200 - y_idx * 2;
+    //G4double cublet_idx = x_idx / 2 + (y_idx / 2) * 2 + (z_idx / 2) * 200;
+
+    // Get event ID and fill ntuple
+	  auto evtID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
+	  analysisManager->FillNtupleDColumn(1,0,evtID);
+    analysisManager->FillNtupleDColumn(1,1,edep);
+    analysisManager->FillNtupleDColumn(1,2,cell_idx);
+    analysisManager->FillNtupleDColumn(1,3,cublet_idx);
+    analysisManager->FillNtupleDColumn(1,4,cells_in_cublet);
+    
+    // All information filled. Add row to ntuple
     analysisManager->AddNtupleRow(1);	
+
+;
   }		
 
   // step length

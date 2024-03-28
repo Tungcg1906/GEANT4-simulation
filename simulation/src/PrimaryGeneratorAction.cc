@@ -99,7 +99,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
   // Set gun position
   fParticleGun
-    ->SetParticlePosition(G4ThreeVector(0.001*mm, 0.001*mm, -1000.*mm));//-worldZHalfLength
+    ->SetParticlePosition(G4ThreeVector(0.0001*mm, 0.0001*mm, -1000.*mm));//-worldZHalfLength
 
   fParticleGun->GeneratePrimaryVertex(anEvent);
 }

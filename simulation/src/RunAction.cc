@@ -60,6 +60,7 @@ RunAction::RunAction()
   analysisManager->OpenFile(fileName);
   
   analysisManager->CreateNtuple("part_info","part_info");
+  analysisManager->CreateNtupleDColumn("Event_ID");
   analysisManager->CreateNtupleDColumn("part_id");
   analysisManager->CreateNtupleDColumn("Track_id");
   analysisManager->CreateNtupleDColumn("parent_id");
@@ -67,12 +68,19 @@ RunAction::RunAction()
   analysisManager->CreateNtupleDColumn("pos_y");
   analysisManager->CreateNtupleDColumn("pos_z");
   analysisManager->CreateNtupleDColumn("mom");
-  analysisManager->CreateNtupleDColumn("event_ID");
+  analysisManager->CreateNtupleDColumn("local_t");
+  analysisManager->CreateNtupleDColumn("global_t");
+  analysisManager->CreateNtupleDColumn("picell_idx");
+  analysisManager->CreateNtupleDColumn("picublet_idx");
+  analysisManager->CreateNtupleDColumn("picells_in_cublet");
   analysisManager->FinishNtuple(0);
   
   analysisManager->CreateNtuple("Edep","Edep");
+  analysisManager->CreateNtupleDColumn("Event_ID");
   analysisManager->CreateNtupleDColumn("edep");
-  analysisManager->CreateNtupleDColumn("cell_no");
+  analysisManager->CreateNtupleDColumn("cell_idx");
+  analysisManager->CreateNtupleDColumn("cublet_idx");
+  analysisManager->CreateNtupleDColumn("cells_in_cublet");
   analysisManager->FinishNtuple(1);
 }
 
