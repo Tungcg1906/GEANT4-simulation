@@ -27,6 +27,7 @@
 /// \file RunAction.cc
 /// \brief Implementation of the B4::RunAction class
 
+
 #include "RunAction.hh"
 
 #include "G4AnalysisManager.hh"
@@ -117,3 +118,5 @@ void RunAction::EndOfRunAction(const G4Run* /*run*/)
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 }
+
+
