@@ -2,6 +2,9 @@
 
 Geant4 simulation data for ["Paticle Detector optimization with Deep Learning techniques"](https://github.com/Tungcg1906/Particle-Detectors-optimization-with-Deep-Learning-techniques) project. 
 
+ ![Data](https://github.com/Tungcg1906/Particle-Detectors-optimization-with-Deep-Learning-techniques/blob/main/images/geant4_sim_test.png)
+
+
 ### Dataset old structure
 
 - Each folder contains 100 .root files with 1000 events each, labeled with a file number (i.e. proton_i.root with i=1,…,100).
