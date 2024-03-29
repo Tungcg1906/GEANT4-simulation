@@ -28,9 +28,14 @@ Geant4 simulation data for ["Paticle Detector optimization with Deep Learning te
 
 ### Dataset new structure
 
+###############################
+
 _In progress - awaiting results_
 
-### To compile and run the simulation, we need to compile it inside a build folder. 
+###############################
+
+### Execute the code
+we need to compile it inside a build folder. 
 
 ```C++
 mkdir build
