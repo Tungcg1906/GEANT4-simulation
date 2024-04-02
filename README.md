@@ -28,11 +28,11 @@ Geant4 simulation data for ["Paticle Detector optimization with Deep Learning te
 
 ### Dataset new structure
 
-###############################
+#########################################################################################################################
 
 _In progress - awaiting results_
 
-###############################
+#########################################################################################################################
 
 ### Execute the code
 we need to compile it inside a build folder. 
