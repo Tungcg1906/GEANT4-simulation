@@ -73,7 +73,8 @@ RunAction::RunAction()
   analysisManager->CreateNtupleDColumn("global_t");
   analysisManager->CreateNtupleDColumn("picell_idx");
   analysisManager->CreateNtupleDColumn("picublet_idx");
-  analysisManager->CreateNtupleDColumn("picells_in_cublet");
+  analysisManager->CreateNtupleDColumn("picells_in_cublet_idx");
+  analysisManager->CreateNtupleDColumn("photon_no");
   analysisManager->FinishNtuple(0);
   
   analysisManager->CreateNtuple("Edep","Edep");
@@ -81,7 +82,7 @@ RunAction::RunAction()
   analysisManager->CreateNtupleDColumn("edep");
   analysisManager->CreateNtupleDColumn("cell_idx");
   analysisManager->CreateNtupleDColumn("cublet_idx");
-  analysisManager->CreateNtupleDColumn("cells_in_cublet");
+  analysisManager->CreateNtupleDColumn("cells_in_cublet_idx");
   analysisManager->FinishNtuple(1);
 }
 
@@ -98,6 +99,7 @@ void RunAction::BeginOfRunAction(const G4Run* /*run*/)
   // Get analysis manager
   auto analysisManager = G4AnalysisManager::Instance();
 
+  
   // Open an output file
   G4String fileName = "hadron.root";
   analysisManager->OpenFile(fileName); 
@@ -113,6 +115,7 @@ void RunAction::EndOfRunAction(const G4Run* /*run*/)
   //
   analysisManager->Write();
   analysisManager->CloseFile();
+  
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
