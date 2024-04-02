@@ -35,7 +35,7 @@ _In progress - awaiting results_
 ####################################################################################################
 
 ### Execute the code
-we need to compile it inside a build folder. 
+We need to compile it inside a build folder. 
 
 ```C++
 mkdir build
