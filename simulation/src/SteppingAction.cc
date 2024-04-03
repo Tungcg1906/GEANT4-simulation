@@ -99,7 +99,7 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
   G4int x_idx_cub = ((picell_idx%100)%10)%2;
   G4int y_idx_cub = ((picell_idx%100)/10)%2;
   G4double picells_in_cublet_idx = z_idx_cub*4+y_idx_cub*2+x_idx_cub;
-  
+
   // For full calorimeter
   /**
   G4int picell_idx = ix + 100*iy + 10000*iz;
@@ -112,20 +112,14 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
   
   auto evtID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
   auto analysisManager = G4AnalysisManager::Instance();
-  if(po>1.*CLHEP::MeV){       // ENERGY CUT FOR DEBUGGING!!!!! <<< ---------------
+  if(po>2.*CLHEP::MeV){       // ENERGY CUT FOR DEBUGGING!!!!! <<< ---------------
   	tr=track->GetTrackID();
   	pt=track->GetParentID();
+    auto edepo = step->GetTotalEnergyDeposit();
   	if(trid!=tr){  // Commented. Not sure why Rumman put it
   	  out_pno=out_pno+1;
   	  G4double part_id = particle->GetPDGEncoding();
-    
-    // Find the number of photon
-    G4int photon_no = -1;
-    if (picells_in_cublet_idx == picublet_idx){
-      if (part_id == 22){
-        photon_no += 1;       
-      }
-    }
+
 	    // Filling MC truth ntuple
       // Get event ID and fill ntuple
       //auto evtID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
@@ -138,17 +132,15 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
   	  analysisManager->FillNtupleDColumn(0,5,pos_y);
   	  analysisManager->FillNtupleDColumn(0,6,pos_z);
   	  analysisManager->FillNtupleDColumn(0,7,po); // mom
-  	  analysisManager->FillNtupleDColumn(0,8,loc_t);
-  	  analysisManager->FillNtupleDColumn(0,9,glb_t);
-      analysisManager->FillNtupleDColumn(0,10,picell_idx);
-      analysisManager->FillNtupleDColumn(0,11,picublet_idx);
-      analysisManager->FillNtupleDColumn(0,12,picells_in_cublet_idx);
-      analysisManager->FillNtupleDColumn(0,13,photon_no);
-
+      analysisManager->FillNtupleDColumn(0,8,edepo);
+  	  analysisManager->FillNtupleDColumn(0,9,loc_t);
+  	  analysisManager->FillNtupleDColumn(0,10,glb_t);
+      analysisManager->FillNtupleDColumn(0,11,picell_idx);
+      analysisManager->FillNtupleDColumn(0,12,picublet_idx);
+      analysisManager->FillNtupleDColumn(0,13,picells_in_cublet_idx);
 
 	    // All information filled. Add row to ntuple
   	  analysisManager->AddNtupleRow(0);
-  	  //G4cout<<  " EVENT N. :" <<evtID<<"\n";
   	  pid=part_id;
   	  tr=track->GetTrackID();
   	  pt=track->GetParentID();
@@ -164,8 +156,8 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
   //###############################################################################
   // Edep tree (energy deposit)
   auto edep = step->GetTotalEnergyDeposit();
-  tot= tot+edep;
-  if(edep>0){
+  //tot= tot+edep; ???
+  if(edep>0.001*CLHEP::MeV){ // Cut energy deposit > 1keV
     auto touchable = step->GetPreStepPoint()->GetTouchable();
     G4int cell_idx = touchable->GetVolume()->GetCopyNo();
     //auto evtID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();

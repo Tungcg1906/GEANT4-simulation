@@ -69,12 +69,12 @@ RunAction::RunAction()
   analysisManager->CreateNtupleDColumn("pos_y");
   analysisManager->CreateNtupleDColumn("pos_z");
   analysisManager->CreateNtupleDColumn("mom");
+  analysisManager->CreateNtupleDColumn("edepo");
   analysisManager->CreateNtupleDColumn("local_t");
   analysisManager->CreateNtupleDColumn("global_t");
   analysisManager->CreateNtupleDColumn("picell_idx");
   analysisManager->CreateNtupleDColumn("picublet_idx");
   analysisManager->CreateNtupleDColumn("picells_in_cublet_idx");
-  analysisManager->CreateNtupleDColumn("photon_no");
   analysisManager->FinishNtuple(0);
   
   analysisManager->CreateNtuple("Edep","Edep");
