@@ -65,9 +65,9 @@ RunAction::RunAction()
   analysisManager->CreateNtupleDColumn("part_id");
   analysisManager->CreateNtupleDColumn("Track_id");
   analysisManager->CreateNtupleDColumn("parent_id");
-  analysisManager->CreateNtupleDColumn("pos_x");
-  analysisManager->CreateNtupleDColumn("pos_y");
-  analysisManager->CreateNtupleDColumn("pos_z");
+  //analysisManager->CreateNtupleDColumn("pos_x");
+  //analysisManager->CreateNtupleDColumn("pos_y");
+  //analysisManager->CreateNtupleDColumn("pos_z");
   analysisManager->CreateNtupleDColumn("mom");
   analysisManager->CreateNtupleDColumn("edepo");
   analysisManager->CreateNtupleDColumn("local_t");
