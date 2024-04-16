@@ -61,29 +61,29 @@ RunAction::RunAction()
   analysisManager->OpenFile(fileName);
   
   analysisManager->CreateNtuple("part_info","part_info");
-  analysisManager->CreateNtupleDColumn("Event_ID");
+  analysisManager->CreateNtupleDColumn("event_id");
   analysisManager->CreateNtupleDColumn("part_id");
-  analysisManager->CreateNtupleDColumn("Track_id");
+  analysisManager->CreateNtupleDColumn("track_id");
   analysisManager->CreateNtupleDColumn("parent_id");
-  //analysisManager->CreateNtupleDColumn("pos_x");
-  //analysisManager->CreateNtupleDColumn("pos_y");
-  //analysisManager->CreateNtupleDColumn("pos_z");
   analysisManager->CreateNtupleDColumn("mom");
   analysisManager->CreateNtupleDColumn("edepo");
-  analysisManager->CreateNtupleDColumn("local_t");
   analysisManager->CreateNtupleDColumn("global_t");
-  analysisManager->CreateNtupleDColumn("picell_idx");
-  analysisManager->CreateNtupleDColumn("picublet_idx");
-  analysisManager->CreateNtupleDColumn("picells_in_cublet_idx");
+  analysisManager->CreateNtupleDColumn("cublet_idx");
+  analysisManager->CreateNtupleDColumn("cell_in_cub");
+  // analysisManager->CreateNtupleDColumn("pos_x");
+  // analysisManager->CreateNtupleDColumn("pos_y");
+  // analysisManager->CreateNtupleDColumn("pos_z");
+  // analysisManager->CreateNtupleDColumn("local_t");
+  // analysisManager->CreateNtupleDColumn("picell_idx");
   analysisManager->FinishNtuple(0);
   
-  analysisManager->CreateNtuple("Edep","Edep");
-  analysisManager->CreateNtupleDColumn("Event_ID");
-  analysisManager->CreateNtupleDColumn("edep");
-  analysisManager->CreateNtupleDColumn("cell_idx");
-  analysisManager->CreateNtupleDColumn("cublet_idx");
-  analysisManager->CreateNtupleDColumn("cells_in_cublet_idx");
-  analysisManager->FinishNtuple(1);
+  // analysisManager->CreateNtuple("Edep","Edep");
+  // analysisManager->CreateNtupleDColumn("Event_ID");
+  // analysisManager->CreateNtupleDColumn("edep");
+  // analysisManager->CreateNtupleDColumn("cell_idx");
+  // analysisManager->CreateNtupleDColumn("cublet_idx");
+  // analysisManager->CreateNtupleDColumn("cells_in_cublet_idx");
+  // analysisManager->FinishNtuple(1);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

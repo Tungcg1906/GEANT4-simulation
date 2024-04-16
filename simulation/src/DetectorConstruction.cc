@@ -109,8 +109,8 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
   // Geometry parameters
   G4double cellSizeXY =  3.*mm;
   G4double cellSizeZ  = 12.*mm;
-  G4double nCellsXY = 10;
-  G4double nCellsZ  = 10;
+  G4double nCellsXY = 100;
+  G4double nCellsZ  = 100;
   G4double calorSizeXY = nCellsXY * cellSizeXY;
   G4double calorSizeZ  = nCellsZ  * cellSizeZ;
   auto worldSizeXY = calorSizeXY;
@@ -150,14 +150,14 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
   auto logicDetector= new G4LogicalVolume(solidDetector,detectorMaterial,"logicDetector");
   G4double a=0;
   for (G4int k = 0; k < nCellsZ; k++) {
-  	for (G4int i = 0; i < nCellsXY; i++) { 
-      for (G4int j = 0; j < nCellsXY; j++) { 
-        a=a+1;
-        auto physDetector = new G4PVPlacement(0,
-        G4ThreeVector(
+  	for (G4int j = 0; j < nCellsXY; j++) { 
+      for (G4int i = 0; i < nCellsXY; i++) { 
+        auto physDetector = new G4PVPlacement(
+          0,
+          G4ThreeVector(
             -((calorSizeXY-cellSizeXY)/2.)*mm + (cellSizeXY*i)*mm,
             -((calorSizeXY-cellSizeXY)/2.)*mm + (cellSizeXY*j)*mm,
-            -((calorSizeZ-cellSizeZ)/2.)*mm + (cellSizeZ*k)*mm
+            -((calorSizeZ -cellSizeZ) /2.)*mm + (cellSizeZ *k)*mm
           ),
           logicDetector,
           "physDetector",
@@ -166,6 +166,7 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
           a,
           false
         );
+        a=a+1;
   		}
     }
   }
