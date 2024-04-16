@@ -51,5 +51,6 @@ Make
 ```
 This creates the executable - default name is exampleB4a
 ```C++
-./exampleB4a
+./exampleB4a // Run with graphic
+./exampleB4a -m run2.mac -t 4 // Run without graphic
 ```
