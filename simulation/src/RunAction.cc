@@ -67,6 +67,7 @@ RunAction::RunAction()
   analysisManager->CreateNtupleDColumn("parent_id");
   analysisManager->CreateNtupleDColumn("mom");
   analysisManager->CreateNtupleDColumn("edepo");
+  analysisManager->CreateNtupleDColumn("deltae");
   analysisManager->CreateNtupleDColumn("global_t");
   analysisManager->CreateNtupleDColumn("cublet_idx");
   analysisManager->CreateNtupleDColumn("cell_in_cub");

@@ -68,10 +68,6 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
   G4double tr=0;
   G4double pt=0;
   G4Track* track = step->GetTrack(); 
-  G4double pxo=step->GetPostStepPoint()->GetMomentum().x();
-  G4double pyo=step->GetPostStepPoint()->GetMomentum().y();
-  G4double pzo=step->GetPostStepPoint()->GetMomentum().z();
-  G4double po=sqrt(pow(pzo,2)+pow(pyo,2)+pow(pxo,2)); // Calculate mom
 
   // Collect energy and track length step by step
   // get volume of the current step
@@ -85,16 +81,28 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
     // part_info tree
 
     // get tracks info
+
  	  tr=track->GetTrackID();
   	pt=track->GetParentID();
 
   	out_pno=out_pno+1;
+
 
     // get particle ID
 
     const G4DynamicParticle* dynParticle = track->GetDynamicParticle();
     G4ParticleDefinition* particle = dynParticle -> GetDefinition();
     G4double part_id = particle->GetPDGEncoding();
+
+
+    // compute momenta and delta energy
+
+    G4double pxo=step->GetPreStepPoint()->GetMomentum().x();
+    G4double pyo=step->GetPreStepPoint()->GetMomentum().y();
+    G4double pzo=step->GetPreStepPoint()->GetMomentum().z();
+    G4double po=sqrt(pow(pzo,2)+pow(pyo,2)+pow(pxo,2)); // Calculate mom
+    
+    auto deltae = step->GetDeltaEnergy();
 
 
     // compute geometric and temporal info
@@ -124,9 +132,10 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
   	analysisManager->FillNtupleDColumn(0,3,pt);
   	analysisManager->FillNtupleDColumn(0,4,po); // mom
     analysisManager->FillNtupleDColumn(0,5,edep);
-  	analysisManager->FillNtupleDColumn(0,6,glb_t);
-    analysisManager->FillNtupleDColumn(0,7,picublet_idx);
-    analysisManager->FillNtupleDColumn(0,8,picells_in_cublet_idx);
+    analysisManager->FillNtupleDColumn(0,6,deltae);
+  	analysisManager->FillNtupleDColumn(0,7,glb_t);
+    analysisManager->FillNtupleDColumn(0,8,picublet_idx);
+    analysisManager->FillNtupleDColumn(0,9,picells_in_cublet_idx);
     // analysisManager->FillNtupleDColumn(0,9,pos_x);
   	// analysisManager->FillNtupleDColumn(0,10,pos_y);
   	// analysisManager->FillNtupleDColumn(0,11,pos_z);
