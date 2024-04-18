@@ -1,0 +1,21 @@
+# Macro file for example B4
+# 
+# To be run preferably in batch, without graphics:
+# % exampleB4[a,b,c,d] run2.mac
+#
+#/run/numberOfThreads 4
+#/control/cout/ignoreThreadsExcept 0
+#
+
+/random/setSeeds 8904138 1546569
+
+/run/initialize
+#
+# Default kinemtics: 
+# electron 50 MeV in direction (0.,0.,1.)
+# 1000 events
+#
+/gun/particle kaon+
+/gun/energy 100 GeV
+/run/printProgress 25
+/run/beamOn 5
