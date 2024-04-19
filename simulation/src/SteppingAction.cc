@@ -74,8 +74,10 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
   auto volume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume(); // Pre!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   // energy deposit
   auto edep = step->GetTotalEnergyDeposit();
+  auto deltae = step->GetDeltaEnergy();
 
-  if(edep>0.001*CLHEP::MeV){    // Cut energy deposit > 1keV
+  auto threshold = 0.001*CLHEP::MeV;
+  if(edep>threshold || abs(deltae)>threshold){    // Cut energy deposit > 1keV
 
     //###############################################################################
     // part_info tree
@@ -95,14 +97,12 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
     G4double part_id = particle->GetPDGEncoding();
 
 
-    // compute momenta and delta energy
+    // compute momenta
 
-    G4double pxo=step->GetPreStepPoint()->GetMomentum().x();
-    G4double pyo=step->GetPreStepPoint()->GetMomentum().y();
-    G4double pzo=step->GetPreStepPoint()->GetMomentum().z();
+    G4double pxo=step->GetPostStepPoint()->GetMomentum().x();
+    G4double pyo=step->GetPostStepPoint()->GetMomentum().y();
+    G4double pzo=step->GetPostStepPoint()->GetMomentum().z();
     G4double po=sqrt(pow(pzo,2)+pow(pyo,2)+pow(pxo,2)); // Calculate mom
-    
-    auto deltae = step->GetDeltaEnergy();
 
 
     // compute geometric and temporal info
