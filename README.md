@@ -6,7 +6,7 @@ Geant4 simulation data for ["Paticle Detector optimization with Deep Learning te
 
 
 ### Dataset old structure
-
+- The simulation produced: kaon, pion, proton, and neutron.
 - Each folder contains 100 .root files with 1000 events each, labeled with a file number (i.e. proton_i.root with i=1,…,100).
 - Each file contains two trees:
   
