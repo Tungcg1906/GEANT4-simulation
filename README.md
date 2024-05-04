@@ -43,6 +43,7 @@ Geant4 simulation data for ["Paticle Detector optimization with Deep Learning te
 | track_id: int label for the track the hit belongs to  | 
 | parent_id: int label for reconstructing where hit was originated from  | 
 | edepo: energy deposited in the hit  | 
+| deltae: change in energy of the particle|
 | mom: particle momentum  | 
 | global_t: Global time of the particle within the simulation. |
 | cublet_idx: Index for a specific cublet within the simulation (1 cublet = 10x10 cells). | 
