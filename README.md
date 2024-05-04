@@ -31,6 +31,8 @@ Geant4 simulation data for ["Paticle Detector optimization with Deep Learning te
 - Each folder contains 50 .root files with 1000 events each, labeled with a file number (i.e. proton_i.root with i=1,…,50).
 - Each file contains one tree:
 
+ ![Data](https://github.com/Tungcg1906/Particle-Detectors-optimization-with-Deep-Learning-techniques/blob/main/images/data_struct_new.png)
+
   
 | **part_info (MC truth of particle hits)**  | 
 | ------------- |
