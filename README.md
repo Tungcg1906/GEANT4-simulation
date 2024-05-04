@@ -27,12 +27,24 @@ Geant4 simulation data for ["Paticle Detector optimization with Deep Learning te
 
 
 ### Dataset new structure
+- The simulation produced: kaon, pion, proton.
+- Each folder contains 50 .root files with 1000 events each, labeled with a file number (i.e. proton_i.root with i=1,…,50).
+- Each file contains one tree:
 
-####################################################################################################
-
-_In progress - awaiting results_
-
-####################################################################################################
+  
+| **part_info (MC truth of particle hits)**  | 
+| ------------- |
+| Cut: particle momentum >1MeV  | 
+| Cut: delta E > 100MeV|
+| event_id: int to label all hits belonging to the same event  |
+| part_id: PDG encoder for particle species  |
+| track_id: int label for the track the hit belongs to  | 
+| parent_id: int label for reconstructing where hit was originated from  | 
+| edepo: energy deposited in the hit  | 
+| mom: particle momentum  | 
+| global_t: Global time of the particle within the simulation. |
+| cublet_idx: Index for a specific cublet within the simulation (1 cublet = 10x10 cells). | 
+| cell_in_cub: Indicates the cell within a cublet where the particle has interacted. |
 
 ### Execute the code
 We need to compile it inside a build folder. 
