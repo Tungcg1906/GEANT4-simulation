@@ -54,7 +54,13 @@ RunAction::RunAction()
   // Create directories
   analysisManager->SetVerboseLevel(1);
   analysisManager->SetNtupleMerging(true);
-    // Note: merging ntuples is available only with Root output
+  // Note: merging ntuples is available only with Root output
+
+  long seeds[2];
+  time_t systime = time(NULL);
+  seeds[0] = (long) systime;
+  seeds[1] = (long) (systime*G4UniformRand());
+  G4Random::setTheSeeds(seeds);
 
   // Book histograms, ntuple
   G4String fileName = "hadron.root";

@@ -76,8 +76,9 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
   auto edep = step->GetTotalEnergyDeposit();
   auto deltae = step->GetDeltaEnergy();
 
-  auto threshold = 0.001*CLHEP::MeV;
-  if(edep>threshold || abs(deltae)>threshold){    // Cut energy deposit > 1keV
+  auto threshold_edep = 0.001*CLHEP::MeV;
+  auto threshold_delta = 0.1*CLHEP::MeV;
+  if(edep>threshold_edep || abs(deltae)>threshold_delta){    // Cut energy deposit > 1keV and cut delta e > 100keV
 
     //###############################################################################
     // part_info tree
@@ -150,7 +151,6 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
   	trid=tr;
 
   }
-  
 
   // step length
   G4double stepLength = 0.;
