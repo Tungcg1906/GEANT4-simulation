@@ -69,3 +69,7 @@ This creates the executable - default name is exampleB4a
 ./exampleB4a // Run with graphic
 ./exampleB4a -m run2.mac // Run without graphic
 ```
+Produce the data
+```C++
+./script.sh
+```
