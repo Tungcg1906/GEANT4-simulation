@@ -64,12 +64,14 @@ int main(int argc,char** argv)
 
   G4String macro;
   G4String session;
+  G4int seed = 123456789;
   G4bool verboseBestUnits = true;
 #ifdef G4MULTITHREADED
   G4int nThreads = 0;
 #endif
   for ( G4int i=1; i<argc; i=i+2 ) {
     if      ( G4String(argv[i]) == "-m" ) macro = argv[i+1];
+    else if ( G4String(argv[i]) == "-s" ) seed = std::stoi(argv[i+1]);
     else if ( G4String(argv[i]) == "-u" ) session = argv[i+1];
 #ifdef G4MULTITHREADED
     else if ( G4String(argv[i]) == "-t" ) {
@@ -94,7 +96,8 @@ int main(int argc,char** argv)
   }
 
   // Optionally: choose a different Random engine...
-  // G4Random::setTheEngine(new CLHEP::MTwistEngine);
+  auto RNG = new CLHEP::MTwistEngine(seed);
+  G4Random::setTheEngine(RNG);
 
   // Use G4SteppingVerboseWithUnits
   if ( verboseBestUnits ) {

@@ -1,0 +1,6 @@
+# Configuration file
+
+/run/initialize
+/gun/energy 100 GeV
+/gun/particle kaon+
+/run/beamOn 1000

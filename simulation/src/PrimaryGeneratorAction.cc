@@ -71,11 +71,6 @@ PrimaryGeneratorAction::~PrimaryGeneratorAction()
 void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
   // This function is called at the begining of event
-  G4Random::setTheEngine(new CLHEP::RanecuEngine());
-  G4long seed = time(NULL);
-  CLHEP::HepRandom::setTheSeed(seed);
-  G4Random::setTheSeed(seed);
-
   // In order to avoid dependence of PrimaryGeneratorAction
   // on DetectorConstruction class we get world volume
   // from G4LogicalVolumeStore
